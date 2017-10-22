@@ -4,6 +4,12 @@ import Icon from './icon.png'
 import Data from './data.xml'
 import printMe from './print.js'
 
+import ReactDOM from 'react-dom'
+import React from 'react'
+import { TMS } from './tms/tms.jsx'
+
+import 'antd/dist/antd.min.css'
+
 if (process.env.NODE_ENV !== 'production') {
     console.log('Looks like we are in development mode!');
 }
@@ -25,12 +31,20 @@ function component() {
     element.appendChild(myIcon);
     console.log(Data);
 
-
     return element;
 }
 
-let element = component(); // Store the element to re-render on print.js changes
-document.body.appendChild(element);
+// let element = component(); // Store the element to re-render on print.js changes
+// document.body.appendChild(element);
+
+var appRoot = document.createElement('div');
+appRoot.id = 'root';
+document.body.appendChild(appRoot);
+ReactDOM.render(
+    <TMS />,
+    document.getElementById('root')
+);
+
 
 if (module.hot) {
     module.hot.accept('./print.js', function() {
